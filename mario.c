@@ -1,58 +1,44 @@
-//вроде все есть, добавь коменты на инглиш, оптимизируй под Edx_IDE, и залей на GitHub
 #include <stdio.h>
 #include <cs50.h>
-void func_R1(int i_probel, int s_stroka);
 
 int main ()
 {
-    int height = -1;
+    int height = 0;
     printf("Enter please height pyramid: ");
-    //scanf("%d", &height);
      
-     height = get_int();
+     height = get_int();                    // Read the number that the user enters
      
      while (height < 0 || height > 23)
     {
-        printf("Retry: ");
-        height = get_int();
+        printf("Retry: ");                  // If the numbers from the range, please enter again
+        height = get_int();                 // Read the number that the user enters
     }
-
-    if ((height > 0) && (height <= 23))
+    
+    int i; //counter
+    for (i = 1; i <= height; i++)
     {
-      //  printf("Cool \n");
+        int probel = 0, reshotka = 0;
+        probel = height - i;            // We count the number of spaces
+        reshotka = height - probel;     // We expect the number of lattices
 
-        int i; //счетчик
-        for (i = 1; i <= height; i++)
+        int j; //counter
+        for(j = 0; j < probel; j++)
         {
-            int probel = 0, reshotka = 0;
-            probel = height - i; //считаем кол-во пробелов
-            reshotka = height - probel;
-
-            int j; //счетчик
-            for(j = 0; j < probel; j++)
-            {
-                printf("%c", ' ');
-            }
-
-            int k; //счетчик
-            for(k = 0; k < reshotka; k++)
-            {
-                printf("%c", '#');
-            }
-            printf("  ");
-
-            for(k = 0; k < reshotka; k++)
-            {
-                printf("%c", '#');
-            }
-            /*for(j = 0; j < probel; j++)
-            {
-                printf("%c", ' ');
-            }*/
-            printf("\n");
+            printf("%c", ' ');          // We print spaces for the first pyramid
         }
+
+        int k; //counter
+        for(k = 0; k < reshotka; k++)
+        {
+            printf("%c", '#');          // We print lattices for the first pyramid
+        }
+        printf("  ");
+
+        for(k = 0; k < reshotka; k++)
+        {
+            printf("%c", '#');          // We print gaps for the second pyramid
+        }
+        printf("\n");
     }
-
-
     return 0;
 }
