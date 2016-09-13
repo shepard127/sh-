@@ -1,23 +1,16 @@
-//программа работет, осталось оптимизировать ее по Edx_IDE, и залить на GitHub
-// и не забудь перевести комментарии на ангийский, и програнать прогу, автотестами на Edx_IDE
-
-
 #include <stdio.h>
+#include <cs50.h>
 int main ()
 {
-    int time = 0;                                           //создаем переменную
-    printf("How any minute you lave in shower-bath?\n");    //спаришивем сколько минут
-    scanf("%d",  &time);                                    //считываем ответ
+    printf("minutes: ");                                
+    int time = get_int();                                   
     printf("\n");
 
-    if (time > 0)                                           //проверям значение
+    if (time > 0)                                          
     {
-        printf("Cool!\n");                                  //debug
-        time = (time*6)*2;                                  //считаем
-        printf("You spend %d %s", time,"bottle water!\n");  //выводим
+        time = (time*6)*2;                                  
+        printf("bottles: %d", time);  
     }
-    else if (time <= 0)                                       //если 0 или < 0
-        printf("Please reboot program, and enter minute > 0");//просим перезагрузить программу, и ввести данные > 0
 
     return 0;
 }
