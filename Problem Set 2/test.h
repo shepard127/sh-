@@ -8,9 +8,9 @@
 	#include    "stm32F10x.h"
 #endif
 
-#include "SS.h"
+//#include "SS.h"
 
-SettingsTypDef Settings;
+//SettingsTypDef Settings;
 //signed short *pAReg;
 
 signed short SS_Setting_Get_TIMER_CCR_MIN()                                    // TIMER_CCR_MIN
