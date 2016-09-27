@@ -58,7 +58,7 @@ void alphabet_arr(char* alphabet, int size_arr, char l_step, bool lit_alphabet)
 	/* знаю, цыфры использовать нельзя, но я уже и так задержал сроки. Нет времени делать рефакторинг */
 	for (int i = 0; i < size_arr; i++)
 	{
-		*(alphabet + i) = l_step;								// записать букву в массив
+		*(alphabet + i) = l_step;						    // записать букву в массив
 
 		if (i == 25 && lit_alphabet)						    // если заполнили наполовину
 		{
@@ -69,7 +69,7 @@ void alphabet_arr(char* alphabet, int size_arr, char l_step, bool lit_alphabet)
 			l_step = 65;	/* ASCII (DEC) */				    // сбрасываем шаг
 		}
 		else
-			l_step++;										    // выбрать следующую букву
+			l_step++;							    // выбрать следующую букву
 	}
 }
 void mixing_arr(int* p_mixing, int size_mixing, string p_crypto_str, int size_crypto_str, char* p_alphabet_l, char* p_alphabet_b)
@@ -130,39 +130,39 @@ void primary_function(string plain_str, string crypto_str)
 	char alphabet_l[52], alphabet_b[52];
 	char step = 97;																		// шагаем с 97 ASCII
 	bool lit_or_big = true;																// TRUE нужен для нижнего регистра
-	alphabet_arr(&alphabet_l[0], sizeof(alphabet_l), step, lit_or_big);					// заполняем массив, маленькими буквами
+	alphabet_arr(&alphabet_l[0], sizeof(alphabet_l), step, lit_or_big);				// заполняем массив, маленькими буквами
 
 	lit_or_big = false;																	// FALSE нужен для верхнего регистра
 	step = 65;																			// шагаем с 97 ASCII
-	alphabet_arr(&alphabet_b[0], sizeof(alphabet_b), step, lit_or_big);					// заполняем массив, большими буквами
+	alphabet_arr(&alphabet_b[0], sizeof(alphabet_b), step, lit_or_big);				// заполняем массив, большими буквами
 	
 	int mixing[strlen(crypto_str)];														// здесь мы будем хранить значения смещений(насколько смещать каждую букву)
 	
 	mixing_arr(&mixing[0], sizeof(mixing), crypto_str, strlen(crypto_str), &alphabet_l[0], &alphabet_b[0]);
 	
-	char crypto_result[strlen(plain_str)];							// здесь будем хранить зашифрованый текст
+	char crypto_result[strlen(plain_str)];								// здесь будем хранить зашифрованый текст
 	const int LENGHT_ALPHABET = 26;									
-	short int shift = 0;											// счетчик для сброса Mixing[]
+	short int shift = 0;										// счетчик для сброса Mixing[]
 	
 	for (int i = 0; i < strlen(plain_str); i++)
 	{
-		short int branch = defin_reg_alphabet(plain_str[i]);		// проверяем что у нас за буква (Верхний рег., нижний рег., или вообще не буква)
+		short int branch = defin_reg_alphabet(plain_str[i]);					// проверяем что у нас за буква (Верхний рег., нижний рег., или вообще не буква)
 
 		switch (branch)												
 		{
 			case 1:
 				{
-					for (int k = 0; k < LENGHT_ALPHABET; k++)		// ищем нашу букву среди букв нижнего регистра
+					for (int k = 0; k < LENGHT_ALPHABET; k++)			// ищем нашу букву среди букв нижнего регистра
 					{
 						if (plain_str[i] == alphabet_l[k])			// если нашли
 						{
 							if (shift == strlen(crypto_str))		// если мы дошли до конца ключа
-								shift = 0;							// сброс на начало ключа
+								shift = 0;				// сброс на начало ключа
 				
 							int temp = k + mixing[shift];			// считаем, какой будет индекс по алфавиту после смещения
-							crypto_result[i] = alphabet_l[temp];	// заполняем crypto_result[i], нашими зашифроваными буквами
+							crypto_result[i] = alphabet_l[temp];		// заполняем crypto_result[i], нашими зашифроваными буквами
 							
-							shift++;								// ползём дальше, по ключу шифрования
+							shift++;					// ползём дальше, по ключу шифрования
 															
 						}
 					}
@@ -170,17 +170,17 @@ void primary_function(string plain_str, string crypto_str)
 				}
 			case 2:
 				{
-					for (int k = 0; k < LENGHT_ALPHABET; k++)		// ищем нашу букву среди букв верхнего регистра
+					for (int k = 0; k < LENGHT_ALPHABET; k++)			// ищем нашу букву среди букв верхнего регистра
 					{
 						if (plain_str[i] == alphabet_b[k])			// если нашли
 						{
 							if (shift == strlen(crypto_str))		// если мы дошли до конца ключа
-								shift = 0;							// сброс на начало ключа
+								shift = 0;				// сброс на начало ключа
 
 							int temp = k + mixing[shift];			// считаем, какой будет индекс по алфавиту после смещения
-							crypto_result[i] = alphabet_b[temp];	// заполняем crypto_result[i], нашими зашифроваными буквами
+							crypto_result[i] = alphabet_b[temp];		// заполняем crypto_result[i], нашими зашифроваными буквами
 
-							shift++;								// ползём дальше, по ключу шифрования
+							shift++;					// ползём дальше, по ключу шифрования
 						}
 					}
 					  break;
@@ -194,7 +194,7 @@ void primary_function(string plain_str, string crypto_str)
 	}
 	/*		RESULT =)   	*/
 	printf("ciphertext:");
-	for (int i = 0; i < strlen(plain_str); i++)						// выводим зашифрованый текст
+	for (int i = 0; i < strlen(plain_str); i++)							// выводим зашифрованый текст
 	{
 		printf("%c", crypto_result[i]);
 	}
