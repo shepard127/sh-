@@ -28,5 +28,6 @@ int main()
             ka = true;
         }
     }
+    printf("\n");
     return 0;
 }
