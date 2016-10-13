@@ -48,17 +48,8 @@ int main(int argc, string argv[])
 
     // sort the haystack
     sort(&haystack[0], size);
-    /* END DEBUG */
-    /*
-    for(int i = 0; i < size; i++)
-    {
-        printf("%d\n", haystack[i]);
-    }
-    return 0;
-    */
-    /* END DEBUG */
+       
     // try to find needle in haystack
-    
     if (search(needle, haystack, size))             // передаем needle -> элемент который будем искать, haystack -> масив, size размер
     {
         printf("\nFound needle in haystack!\n\n");  // если элемент в массиве есть, говорим что "он есть"
