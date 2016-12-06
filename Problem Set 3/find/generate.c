@@ -21,30 +21,26 @@
 
 int main(int argc, string argv[])
 {
-    // TODO: comment me
     if (argc != 2 && argc != 3)
     {
-        printf("Usage: ./generate n [s]\n");    // выводим если колличество аргументов, не 2 и не 3
+        printf("Usage: ./generate n [s]\n");    // deduce if the number of arguments, not 2 and not 3
         return 1;
     }
 
-    // TODO: comment me
-    int n = atoi(argv[1]);                      // конвертируем элемент в int
+    int n = atoi(argv[1]);                      // convert the element to an int
 
-    // TODO: comment me
     if (argc == 3)
     {
-        srand48((long) atoi(argv[2]));          // пользователь ввел 3-й аргумент, используем его для инициализации drand48()
+        srand48((long) atoi(argv[2]));          // the user has entered the 3rd argument, use it to initialize drand48 ()
     }
     else
     {
-        srand48((long) time(NULL));             // иначе берем рандомное число
+        srand48((long) time(NULL));             // otherwise take a random number
     }
 
-    // TODO: comment me
     for (int i = 0; i < n; i++)
     {
-        printf("%i\n", (int) (drand48() * LIMIT));  // возвращает нам значение (типа double), мы его множим на 65536, и выводим как int
+        printf("%i\n", (int) (drand48() * LIMIT));  // returns us to the value of (double type), we multiply by 65536, and print as an int
     }
 
     // success
