@@ -12,11 +12,9 @@
  * Returns true if value is in array of n values, else false.
  */
 bool search(int l_needle, int l_haystack[], int size)
-{
-    // TODO: implement a searching algorithm
-    
+{  
     if(l_haystack[size/2] == l_needle)
-        return true;                   // true 
+        return true;                    // true 
     if(size < 2)
         return false;                   // false
     
@@ -26,7 +24,7 @@ bool search(int l_needle, int l_haystack[], int size)
     if(l_haystack[size/2] < l_needle)
         return search(l_needle, &l_haystack[size/2 + 1], size/2 - 1);
         
-    return false;       // заглушка для проверки(clang ругается когда функция по-default ничего возвращает)
+    return false;       // to check the plug(clang swears by the function-default returns nothing)
 }
 
 /**
@@ -34,13 +32,12 @@ bool search(int l_needle, int l_haystack[], int size)
  */
 void sort(int* p_haystack, int size)
 {
-    // TODO: implement an O(n^2) sorting algorithm
-    int buff = 0;                       // переменая которая будет поможет нам в сортировке  
+    int buff = 0;                       // variables that will help us in sorting  
     for(int i = 0; i < size; i++)
     {
         for(int j = 0; j < size - i - 1; j++)
         {
-            /*if(values[j] > values[j+1]) // если текущий элемент больше следующиего - меняем элементы местами
+            /*if(values[j] > values[j+1]) // If the current element is larger following - changing elements in places
             {
                 buff = values[j];
                 values[j] = values[j+1];
