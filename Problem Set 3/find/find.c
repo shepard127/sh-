@@ -26,23 +26,23 @@ int main(int argc, string argv[])
     }
 
     // remember needle
-    int needle = atoi(argv[1]);             // иголка (элемент который мы будем искать)
+    int needle = atoi(argv[1]);             // needle (element that we seek)
 
     // fill haystack
     int size;
-    int haystack[MAX];                      // стог сена
+    int haystack[MAX];                      // a stack of hay
     for (size = 0; size < MAX; size++)
     {
         // wait for hay until EOF
         printf("\nhaystack[%i] = ", size);
-        int straw = get_int();              // создаем нашу "соломинку"
+        int straw = get_int();              // we create our "straw"
         if (straw == INT_MAX)
         {
             break;
         }
      
         // add hay to stack
-        haystack[size] = straw;             // добавить в "стог сена, соломинку":)
+        haystack[size] = straw;             // add "haystack, straw ':)
     }
     printf("\n");
 
@@ -50,14 +50,14 @@ int main(int argc, string argv[])
     sort(&haystack[0], size);
        
     // try to find needle in haystack
-    if (search(needle, haystack, size))             // передаем needle -> элемент который будем искать, haystack -> масив, size размер
+    if (search(needle, haystack, size))             // pass the needle -> element that we seek, haystack -> array, size
     {
-        printf("\nFound needle in haystack!\n\n");  // если элемент в массиве есть, говорим что "он есть"
+        printf("\nFound needle in haystack!\n\n");  // if there is an element in the array, saying that "it is"
         return 0;
     }
     else
     {
-        printf("\nDidn't find needle in haystack.\n\n"); // если элемента нет, говорим что "нет"
+        printf("\nDidn't find needle in haystack.\n\n"); // if the element is not present, saying that "no"
         return 1;
     }
 }
