@@ -8,18 +8,18 @@
 #include "dictionary.h"
 
 
-#define SIZE 1000000        // размер хеш-таблицы
+#define SIZE 1000000        // size hash-table
 
-typedef struct node         // структура нод связанного списка
+typedef struct node         // structure node linked list
 {
     char word[LENGTH+1];
     struct node* next;
 }
 node;
 
-node* hashtable[SIZE] = {NULL};     // создание хеш-таблицы
+node* hashtable[SIZE] = {NULL};     // create hash-table
 
-int hash (const char* word)         // функция создания хеша
+int hash (const char* word)         // function create hash
 {
     int hash = 0;
     int n;
@@ -36,21 +36,21 @@ int hash (const char* word)         // функция создания хеша
     return hash;    
 }
 
-int dictionarySize = 0;     // здесь мы будем хранить рамер словаря
+int dictionarySize = 0;     // here we will store dictionary size
 
 /**
  * Loads dictionary into memory.  Returns true if successful else false.
  */
 bool load(const char* dictionary)
 {
-    FILE* file = fopen(dictionary, "r"); // открываем словарь
+    FILE* file = fopen(dictionary, "r"); // open dictionary
     
     if (file == NULL)
         return false;
     
     char word[LENGTH+1];
     
-    while (fscanf(file, "%s\n", word)!= EOF)    // бежим по словарю, считываем по слову, и так пока файл не закончится
+    while (fscanf(file, "%s\n", word)!= EOF)    // run a dictionary, reading the word, and so long as the file does not end
     {
         node* newWord = malloc(sizeof(node));   
         
@@ -63,16 +63,16 @@ bool load(const char* dictionary)
             hashtable[index] = newWord;
             newWord->next = NULL;
         }
-        else                                    // если лежит (в словаре)
+        else                                    // if the word is in the dictionary
         {
             newWord->next = hashtable[index];
             hashtable[index] = newWord;
         }
         
-        dictionarySize++;                       // увеличили размер
+        dictionarySize++;                       // increase size
     }
     
-    fclose(file);                               // закрыли файл   
+    fclose(file);                               // close file   
     
     return true;                
 }
@@ -82,22 +82,22 @@ bool load(const char* dictionary)
  */
 bool check(const char* word)
 {
-    char buff[LENGTH + 1];                      // создаем временную переменную для храннения слова в нижнем регистре
+    char buff[LENGTH + 1];                      // create temporary variable for store word in low register
     int lenght = strlen(word);
     for(int i = 0; i < lenght; i++)
         buff[i] = tolower(word[i]);
     buff[lenght] = '\0';
     
-    int index = hash(buff);                     // получаем либо хеш слова, либо его индекс в хеш-таблице
+    int index = hash(buff);                     // or obtain the hash word, or its index into the hash table
     
-    if (hashtable[index] == NULL)               // проверяем что мы получили
+    if (hashtable[index] == NULL)               // check that we got
     {
         return false;
     }
     
-    node* marker = hashtable[index];            // создаем ноду наше слово, и сходу пихаем ее в хеш-таблицу
+    node* marker = hashtable[index];            // create node (our words), and immediately put in hash-table
     
-    while (marker != NULL)                      // если по данному индексу хеш не пустой, перебираем слова и сравниваем их
+    while (marker != NULL)                      // if current index(hash) not NULL, sort out the words and compare them
     {
         if (strcmp(buff, marker->word) == 0)
         {
@@ -106,7 +106,7 @@ bool check(const char* word)
         marker = marker->next;
     }
 
-    return false;                               // если мы его так и не нашли вертаем false
+    return false;                               // if none found return false
 }
 
 /**
@@ -114,10 +114,10 @@ bool check(const char* word)
  */
 unsigned int size(void)
 {
-    if (dictionarySize > 0)                         // если словарь не пустой, вертаем длинну словаря
+    if (dictionarySize > 0)                         // if dictionary not empty, return lenght dictionary
         return dictionarySize;
     else
-        return 0;                                   // иначе возвращаем его длинну(ноль вертаем так-как он пуст)
+        return 0;                                   // else return 0
 }
 
 /**
@@ -127,9 +127,9 @@ bool unload(void)
 {
     for(int i = 0; i < SIZE; i = i + 0)
     {
-        if (hashtable[i] == NULL)                   // если хеш-таблица по-индексу пустая идем дальше
+        if (hashtable[i] == NULL)                   // if the current index (hash table) there's nothing going on
             i++;
-        else                                        // иначе, перебираем узлы и чистим за собой память
+        else                                        // else, iterate through nodes and clean for a memory
         {
             while(hashtable[i] != NULL)
             {
@@ -137,8 +137,8 @@ bool unload(void)
                 hashtable[i] = marker->next;
                 free(marker);
             }
-            i++;                                    // как только натыкаемся на пустой хеш, переходим на следующий хеш
+            i++;                                    // step to next hash index
         }
     }
-    return true;                        // вертаем true в случае успеха
+    return true;
 }
