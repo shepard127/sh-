@@ -23,47 +23,47 @@ int main(int argc, char *argv[])
     char *infile = argv[1];
     FILE *inptr = fopen(infile, "r");
     
-    if (inptr == NULL)				// проверка указателя на файл
+    if (inptr == NULL)				// a pointer to a file check
     {
         fprintf(stderr, "Could not open %s.\n", infile);
         return 2;
     }
     
-    if (buffer == NULL)				// проверка буфера
+    if (buffer == NULL)				// buffer check
     {
         printf("Error memory\n");
         return 2;
     }
     
-    while (fread(buffer,sizeof(buffer), 1, inptr) == 1)			// считываем блок памяти, то что считали пихаем в буфер
+    while (fread(buffer,sizeof(buffer), 1, inptr) == 1)			// read the block of memory, what was considered to push in the buffer
     {
-            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] == 0xe0 || buffer[3] == 0xe1)) // если начало буфера похоже на начало jpg
+            if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] == 0xe0 || buffer[3] == 0xe1)) // if the beginning of the buffer similar to the beginning of the jpg
             {
-                sprintf(nameNewFile, "%03d.jpg", counter);		// записываем в nameNewFile название файла который мы хотим создать
+                sprintf(nameNewFile, "%03d.jpg", counter);		// nameNewFile record in the file name that we want to create
                 counter++;										
                 
     
-                if (newOutFile != NULL)									// если указатель newOutFile задействован
+                if (newOutFile != NULL)									// if a pointer engaged newOutFile
                 {
                     fclose(newOutFile);	
-                    newOutFile = fopen(nameNewFile, "w");				// создали файл
-                    fwrite(buffer, sizeof(buffer), 1, newOutFile);		// закинули в него данные из буфера
+                    newOutFile = fopen(nameNewFile, "w");				// create file
+                    fwrite(buffer, sizeof(buffer), 1, newOutFile);		// thrown into it data from the buffer
                 }
                 
                     else
                     {
-                        newOutFile = fopen(nameNewFile, "w");			// создали файл
-                        fwrite(buffer, sizeof(buffer), 1, newOutFile);	// закинули в него данные из буфера
+                        newOutFile = fopen(nameNewFile, "w");			// create file
+                        fwrite(buffer, sizeof(buffer), 1, newOutFile);	// thrown into it data from the buffer
                     }
             }
              
             else if(newOutFile != NULL)					
             {
-                fwrite(buffer, sizeof(buffer), 1, newOutFile);		// продолжаем записывать файл
+                fwrite(buffer, sizeof(buffer), 1, newOutFile);		// continue record file
             }
     }
     
-     fclose(inptr);			// закрыли все файлы, очистили буфер
+     fclose(inptr);			// close all file, buffer cleaning
      fclose(newOutFile);
      free(buffer);
      
