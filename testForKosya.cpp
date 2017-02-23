@@ -19,7 +19,7 @@ int inputData(int* inputArray)
 	printf("Заполните масссив цифрками");
 	// ну мы его типа заполнили
 	
-	return &inputArray[0]; // вернули адрес на первый элемент массива
+	return inputArray; // вернули адрес на первый элемент массива
 }
 
 int calcData(int* resultInArr)
@@ -27,7 +27,7 @@ int calcData(int* resultInArr)
 	// в эту функцию мы получили уже заполненный массивчик
 	// мы тут типа выгребаем все двоички из массива и складываем их в другой массив arrayWithtTwo(он глобальный и его видим)
 	
-	return &arrayWithtTwo[0];		// возвращаем указатель на первый элемент массива с двоичками
+	return arrayWithtTwo;		// возвращаем указатель на первый элемент массива с двоичками
 }
 
 int printOutData(int *sumArray)
